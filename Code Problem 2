@@ -1,0 +1,52 @@
+#include <iostream>
+#include <string>
+#include <cctype>
+
+using namespace std;
+
+// Fungsi untuk mentransformasi pesan asli menjadi pesan tersandi
+string enkripsiPesan(const string& pesanAsli) {
+    string hasil = "";
+    int shift = 0; // Pergeseran awal untuk huruf pertama adalah 0
+
+    for (char c : pesanAsli) {
+        // Cek apakah karakter merupakan huruf kapital (A-Z)
+        if (isupper(c)) {
+            // Konversi karakter ke posisi alfabet (A = 1, B = 2, ..., Z = 26)
+            int val = c - 'A' + 1;
+            
+            // Hitung nilai posisi huruf baru
+            int valBaru = val + shift;
+            
+            // Jika hasil pergeseran melewati Z (26), putar kembali ke A
+            if (valBaru > 26) {
+                valBaru -= 26;
+            }
+            
+            // Konversi kembali nilai posisi ke karakter baru
+            char hurufBaru = 'A' + (valBaru - 1);
+            hasil += hurufBaru;
+            
+            // Simpan nilai huruf asli sebelum digeser untuk pergeseran huruf berikutnya[cite: 2]
+            shift = val;
+        } else {
+            // Jika bukan huruf kapital A-Z (spasi/simbol), biarkan tetap
+            hasil += c;
+        }
+    }
+    
+    return hasil;
+}
+
+int main() {
+    string pesanAsli;
+    
+    cout << "Masukkan Pesan Asli (Huruf Kapital): ";
+    getline(cin, pesanAsli);
+    
+    string pesanTersandi = enkripsiPesan(pesanAsli);
+    
+    cout << "Pesan Tersandi: " << pesanTersandi << endl;
+    
+    return 0;
+}
