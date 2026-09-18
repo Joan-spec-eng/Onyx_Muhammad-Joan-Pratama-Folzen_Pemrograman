@@ -1,0 +1,63 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    int N, K;
+    
+    // Input jumlah astronot (N) dan langkah awal (K)
+    cout << "Masukkan jumlah astronot (N): ";
+    cin >> N;
+    cout << "Masukkan nilai hitungan awal (K): ";
+    cin >> K;
+    
+    // Inisialisasi daftar astronot dari nomor 1 sampai N
+    vector<int> astronot;
+    for (int i = 1; i <= N; ++i) {
+        astronot.push_back(i);
+    }
+    
+    int posisiSekarang = 0; // Indeks berbasis 0 untuk komputasi
+    
+    cout << "\n--- Urutan Eliminasi Astronot ---" << endl;
+    
+    // Proses eliminasi berulang hingga tersisa 1 astronot
+    while (astronot.size() > 1) {
+        // Hitung indeks astronot yang tereliminasi menggunakan aritmatika modular
+        int posisiEliminasi = (posisiSekarang + K - 1) % astronot.size();
+        
+        // Ambil nomor unik astronot yang dieliminasi
+        int nomorDieliminasi = astronot[posisiEliminasi];
+        
+        // Tampilkan astronot yang tereliminasi
+        cout << "Astronot " << nomorDieliminasi << " dieliminasi." << endl;
+        
+        // Hapus astronot dari daftar
+        astronot.erase(astronot.begin() + posisiEliminasi);
+        
+        // Posisi hitungan berikutnya dimulai dari tempat astronot yang baru dihapus
+        posisiSekarang = posisiEliminasi;
+        
+        // Perbarui nilai K berdasarkan aturan khusus
+        if (nomorDieliminasi % 2 == 0) {
+            // Jika nomor astronot genap, K bertambah 2
+            K += 2;
+        } else {
+            // Jika nomor astronot ganjil, K berkurang 1
+            K -= 1;
+        }
+        
+        // Batas minimal nilai K adalah 2
+        if (K < 2) {
+            K = 2;
+        }
+    }
+    
+    // Tampilkan astronot terakhir yang tersisa
+    cout << "\n---------------------------------" << endl;
+    cout << "Astronot terakhir yang bertahan: " << astronot[0] << endl;
+    cout << "---------------------------------" << endl;
+    
+    return 0;
+}
