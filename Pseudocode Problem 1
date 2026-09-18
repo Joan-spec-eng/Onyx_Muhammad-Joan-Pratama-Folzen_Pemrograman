@@ -1,0 +1,9 @@
+Hitung indeks astronot yang akan dieliminasi dengan rumus modular lingkaran: (posisi_sekarang + K - 1) MOD jumlah_astronot_tersisa.
+Dapatkan nomor astronot yang berada di indeks tersebut. 
+Cetak/catat nomor astronot yang tereliminasi.  
+Hapus astronot tersebut dari daftar.
+Update posisi_sekarang ke indeks bekas astronot yang baru dihapus (karena elemen di sebelahnya otomatis maju mengisi posisi tersebut).
+Pembaruan Nilai K:Periksa nomor astronot yang baru saja dieliminasi:Jika nomor astronot bernilai genap, tambahkan nilai $K$ sebesar $2$ ($K = K + 2$).  
+Jika nomor astronot bernilai ganjil, kurangi nilai $K$ sebesar $1$ ($K = K - 1$).   
+Periksa apakah nilai $K$ hasil pembaruan kurang dari $2$. Jika $K < 2$, ubah nilai $K$ menjadi $2$. 
+ Menentukan Pemenang:Ketika perulangan selesai (hanya tersisa $1$ astronot di daftar), tampilkan astronot tersisa tersebut sebagai astronot terakhir yang bertahan.
